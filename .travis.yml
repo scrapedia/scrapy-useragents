@@ -1,0 +1,61 @@
+language: python
+sudo: false
+branches:
+  only:
+  - master
+  - "/^\\d\\.\\d+$/"
+  - "/^\\d\\.\\d+\\.\\d+(rc\\d+|\\.dev\\d+)?$/"
+matrix:
+  include:
+  - python: 2.7
+    env: TOXENV=py27
+  - python: 2.7
+    env: TOXENV=jessie
+  - python: 2.7
+    env: TOXENV=pypy
+  - python: 3.3
+    env: TOXENV=py33
+  - python: 3.5
+    env: TOXENV=py35
+  - python: 3.6
+    env: TOXENV=py36
+  - python: 3.6
+    env: TOXENV=docs
+install:
+- |
+  if [ "$TOXENV" = "pypy" ]; then
+    export PYENV_ROOT="$HOME/.pyenv"
+    if [ -f "$PYENV_ROOT/bin/pyenv" ]; then
+      pushd "$PYENV_ROOT" && git pull && popd
+    else
+      rm -rf "$PYENV_ROOT" && git clone --depth 1 https://github.com/yyuu/pyenv.git "$PYENV_ROOT"
+    fi
+    # get latest portable PyPy from pyenv directly (thanks to natural version sort option -V)
+    export PYPY_VERSION=`"$PYENV_ROOT/bin/pyenv" install --list |grep -o -E 'pypy-portable-[0-9][\.0-9]*$' |sort -V |tail -1`
+    "$PYENV_ROOT/bin/pyenv" install --skip-existing "$PYPY_VERSION"
+    virtualenv --python="$PYENV_ROOT/versions/$PYPY_VERSION/bin/python" "$HOME/virtualenvs/$PYPY_VERSION"
+    source "$HOME/virtualenvs/$PYPY_VERSION/bin/activate"
+  fi
+- pip install -U tox twine wheel codecov
+script: tox
+after_success:
+- codecov
+#notifications:
+#  irc:
+#    use_notice: true
+#    skip_join: true
+#    channels:
+#    - irc.freenode.org#scrapy
+cache:
+  directories:
+  - "$HOME/.cache/pip"
+deploy:
+  provider: pypi
+  distributions: sdist bdist_wheel
+  user: grammy.jiang
+  password:
+    secure: Ar+fhwcEAbh22eB1l2kSpNP5C3lbNLUoA4eXk6CsAcsxxB6FPHZeNutenvwIMAbo2t2SR9KUKV6dWhMLqhsRxMCC21Vx4iVVNICasyvRGK/kUR1Jb6qKMUtsqocF1M2k4LXQvUa98kuNUuO46f5K3oe1ygcEHhYG1M4yDbsKmPwT35+1aLYumKmqN4Bfv29y6IIErSWSvPfvkB2uoF0i1QxLhXvs3efZVmERQ9VVTMNGbuIQudkkIs2v5imtSW45od7BPM+1DMseKmK364x+6Ll4JFXnVVDrarHEdlaks1Uhqbiooq0B16dSoypc4PrynwP5zW3d5mQl5rNF3Sq75jM5ABfyKB/Z9lAVzRr6Qk4EKKy3uN4aJp2CegqOuFWxqQg9hJpxlGnaYIRJR41thddTOe/ZQX7E7aJRuC+8M0sSMomsvk/Ji0n3m488QYaUd2tLVgwVRtlSYY/e9wL8J1fqSPoxqDDbGyu8e4HzcOeJvT2ITNY0H//xLqJy2JUbHDLc/5rmh7q4LuxzqVB2Wfq0KKNRt0E9bsUewLDKXDSMQ8KrpYfo5nkztfu7VBxTf99CCvT8eFmE3ibhvINj7aiXT565YjH7IkGwHXo7D04mMvrNdDUeFYIrkHA5wOgp6zPHAGWUGNK1u0FjLq3dereXF82dKqilI8R7CNkNqRQ=
+#  on:
+#    tags: true
+#    repo: scrapy/scrapy
+#    condition: "$TOXENV == py27 && $TRAVIS_TAG =~ ^[0-9]+[.][0-9]+[.][0-9]+(rc[0-9]+|[.]dev[0-9]+)?$"
