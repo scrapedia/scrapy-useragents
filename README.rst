@@ -14,6 +14,7 @@ Requirements
 
 * Tests on Python 2.7 and Python 3.5, it could work on other version higher
 then Python 3.3
+
 * Tests on Linux, but it's a pure python module, it could work on other
 platforms with official python supported, e.g. Windows, Mac OSX, BSD
 
@@ -71,5 +72,7 @@ TODO
 
 * Read User-Agent from a backend, e.g. MongoDB, MySQL, or even a file saved on
 the local disk.
+
 * Rotate User-Agent binding with cookies, keep the consistence
+
 * Add meta key for User-Agent selection based on each request
