@@ -1,0 +1,6 @@
+include README.rst
+include AUTHORS
+include MANIFEST.in
+include scrapy_useragents/VERSION
+recursive-include tests *
+global-exclude __pycache__ *.py[cod]
