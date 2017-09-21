@@ -55,6 +55,9 @@ In setting.py, for example::
          'Firefox/55.0')  # firefox
     ]
 
+Settings Reference
+------------------
+
 USER_AGENTS
 ~~~~~~~~~~~
 
