@@ -66,9 +66,10 @@ A list of User-Agent to use when crawling, unless overridden.
 The middleware will rotate this list by function cycle from the module
 itertools.
 
-Be careful this middleware can't handle the situation that the
+**Be careful this middleware can't handle the situation that the
 COOKIES_ENABLED is True, and the website binds the cookies with
-User-Agent, it may cause unpredictable result of the spider.
+User-Agent, it may cause unpredictable result of the spider. This problem will
+be solved in the future.**
 
 TODO
 ====
