@@ -18,6 +18,13 @@ Scrapy-UserAgents
    :target: http://codecov.io/github/grammy-jiang/scrapy-useragents?branch=master
    :alt: Coverage report
 
+.. .. image:: https://img.shields.io/github/downloads/grammy-jiang/scrapy-useragents/total.svg
+   :target: https://github.com/grammy-jiang/scrapy-useragents
+   :alt: Downloads
+
+.. image:: https://img.shields.io/pypi/dm/scrapy-useragents.svg
+   :target: https://github.com/grammy-jiang/scrapy-useragents
+   :alt: Downloads
 
 Overview
 ========
