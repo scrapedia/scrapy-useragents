@@ -2,6 +2,23 @@
 Scrapy-UserAgents
 =================
 
+.. image:: https://img.shields.io/pypi/v/scrapy-useragents.svg
+    :target: https://pypi.python.org/pypi/scrapy-useragents
+   :alt: PyPI Version
+
+.. image:: https://img.shields.io/travis/grammy-jiang/scrapy-useragents/master.svg
+    :target: http://travis-ci.org/grammy-jiang/scrapy-useragents
+   :alt: Build Status
+
+.. image:: https://img.shields.io/badge/wheel-yes-brightgreen.svg
+    :target: https://pypi.python.org/pypi/scrapy-useragents
+   :alt: Wheel Status
+
+.. image:: https://img.shields.io/codecov/c/github/grammy-jiang/scrapy-useragents/master.svg
+    :target: http://codecov.io/github/grammy-jiang/scrapy-useragents?branch=master
+   :alt: Coverage report
+
+
 Overview
 ========
 
