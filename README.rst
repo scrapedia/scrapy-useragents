@@ -89,7 +89,9 @@ Settings Reference
 USER_AGENTS
 ~~~~~~~~~~~
 
-A list of User-Agent to use when crawling, unless overridden.
+A list of User-Agent to use when crawling, unless overridden (Yes, headers still
+can be specified in Spider or Request, but in spider the attribute name changes
+from useragent to useragents, while Request still remain the same).
 
 The middleware will rotate this list by function cycle from the module
 itertools.
