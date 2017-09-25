@@ -3,8 +3,10 @@ from os.path import dirname, join
 from pkg_resources import parse_version
 from setuptools import setup, find_packages, __version__ as setuptools_version
 
-with open(join(dirname(__file__), 'scrapy_useragents/VERSION'), 'rb') as f:
-    version = f.read().decode('ascii').strip()
+import versioneer
+
+# with open(join(dirname(__file__), 'scrapy_useragents/VERSION'), 'rb') as f:
+#     version = f.read().decode('ascii').strip()
 
 
 def has_environment_marker_platform_impl_support():
@@ -27,7 +29,8 @@ if has_environment_marker_platform_impl_support():
 
 setup(
     name='Scrapy-UserAgents',
-    version=version,
+    version=versioneer.get_version(),
+    cmdclass=versioneer.get_cmdclass(),
     url='https://github.com/grammy-jiang/scrapy-useragents',
     description='A middleware to change user-agent in request for Scrapy',
     long_description=open('README.rst').read(),
